@@ -26,8 +26,6 @@ coeffs = qubit_op.coeffs # type: ignore
 
 print(pauli_strings, coeffs)
 
-# print(str(pauli_strings[0]))
-
 # Collect terms with the same coefficient
 collected_dict = {}
 for i in range(len(coeffs)):
