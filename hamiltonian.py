@@ -1,9 +1,5 @@
-import matplotlib.pyplot as plt
 import numpy as np
-from numpy._core import identity
-from qiskit.circuit import Parameter, QuantumCircuit
-from qiskit.primitives import StatevectorEstimator
-from qiskit.quantum_info import Pauli, SparsePauliOp
+from qiskit.quantum_info import SparsePauliOp
 from qiskit_nature.second_q.drivers import PySCFDriver
 from qiskit_nature.second_q.mappers import JordanWignerMapper
 
@@ -36,22 +32,22 @@ def HeH_HAMILTONIAN():
 
     return helium_hydride_hamiltonian
 
-my_hamiltonian = HeH_HAMILTONIAN()
-# print(my_hamiltonian)
-
-# print(qubit_op)
+# my_hamiltonian = HeH_HAMILTONIAN()
+# # print(my_hamiltonian)
 #
-test_pauli_strings = my_hamiltonian.paulis # type: ignore
-test_coeffs = my_hamiltonian.coeffs # type: ignore
-
-print(test_pauli_strings, test_coeffs)
-
-# Collect terms with the same coefficient
-collected_dict = {}
-for i in range(len(my_hamiltonian)):
-    collected_dict.setdefault(np.round(np.real(test_coeffs[i]), 6), []).append(str(test_pauli_strings[i]))
-
-for key, values in collected_dict.items():
-    print(key, values)
-
-print(len(my_hamiltonian))
+# # print(qubit_op)
+# #
+# test_pauli_strings = my_hamiltonian.paulis # type: ignore
+# test_coeffs = my_hamiltonian.coeffs # type: ignore
+#
+# print(test_pauli_strings, test_coeffs)
+#
+# # Collect terms with the same coefficient
+# collected_dict = {}
+# for i in range(len(my_hamiltonian)):
+#     collected_dict.setdefault(np.round(np.real(test_coeffs[i]), 6), []).append(str(test_pauli_strings[i]))
+#
+# for key, values in collected_dict.items():
+#     print(key, values)
+#
+# print(len(my_hamiltonian))
