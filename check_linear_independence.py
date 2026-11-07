@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def CHECK_LINEAR_INDEPENDENCE(basis_array):
     "Return True if linearly indepdndant and false otherwise"
 
