@@ -19,6 +19,8 @@ mapper = JordanWignerMapper()
 # Convert to qubit operator (qubit Hamiltonian)
 qubit_op = mapper.map(problem.hamiltonian.second_q_op())
 
+print(qubit_op)
+
 pauli_strings = qubit_op.paulis # type: ignore
 coeffs = qubit_op.coeffs # type: ignore
 
