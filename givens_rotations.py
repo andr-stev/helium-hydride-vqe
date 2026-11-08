@@ -33,7 +33,7 @@ class GivensRotations:
             >>> gate = GivensRotations.G1_ROTATION(0.5)
             >>> circuit = QuantumCircuit(2).append(gate)
         """
-        circuit = QuantumCircuit(2)
+        circuit = QuantumCircuit(2, name="G1")
 
         # Apply CNOT gate with q[0] as control, q[1] as target
         circuit.cx(0, 1)
@@ -68,7 +68,7 @@ class GivensRotations:
             >>> gate = GivensRotations.G2_ROTATION(0.5)
             >>> circuit = QuantumCircuit(4).append(gate)
         """
-        circuit = QuantumCircuit(4)
+        circuit = QuantumCircuit(4, name="G2")
 
         # Create CNOT chain: q[0] -> q[1] -> q[2] -> q[3]
         circuit.cx(0, 1)
