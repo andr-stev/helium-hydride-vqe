@@ -1,13 +1,43 @@
-from qiskit import QuantumCircuit
-from qiskit.circuit import Parameter
 import numpy as np
+from qiskit import QuantumCircuit
+from qiskit.circuit import ParameterVector
+from qiskit.primitives import StatevectorEstimator
+
+from givens_rotations import GivensRotations
+from hamiltonian import HeH_HAMILTONIAN
+
+my_helium_hydride_hamiltonian = HeH_HAMILTONIAN()
+number_of_qubits_for_givens_ansatz = my_helium_hydride_hamiltonian.num_qubits
+
 
 ansatz_circuit = QuantumCircuit(4)
 
 ansatz_circuit.x(0)
 ansatz_circuit.x(1)
 
+theta = ParameterVector("theta", length = 3)
+
+givens_gate_1_theta_one = GivensRotations.G1_ROTATION(theta[0])
+givens_gate_1_theta_two = GivensRotations.G1_ROTATION(theta[1])
+givens_gate_2_theta_three = GivensRotations.G2_ROTATION(theta[2])
+
+ansatz_circuit = ansatz_circuit.compose(givens_gate_1_theta_one, [0, 2])
+ansatz_circuit = ansatz_circuit.compose(givens_gate_1_theta_two, [1, 3])
+ansatz_circuit = ansatz_circuit.compose(givens_gate_2_theta_three, ansatz_circuit.qubits)
+
+
 print(ansatz_circuit.draw("text"))
 
-angles = Parameter("theta",  length = 3)
-parameter_counter = 0
+my_angles = [np.pi/30, np.pi/3, np.pi/4]
+
+primitive_unified_block = (ansatz_circuit, my_helium_hydride_hamiltonian, my_angles)
+
+estimator = StatevectorEstimator()
+
+job = estimator.run([primitive_unified_block])
+
+result = job.result()
+
+energy = result[0].data.evs
+
+print(energy)
