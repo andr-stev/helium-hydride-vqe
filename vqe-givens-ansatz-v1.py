@@ -1,6 +1,6 @@
 import numpy as np
 from qiskit import QuantumCircuit
-from qiskit.circuit import ParameterVector
+from qiskit.circuit import Parameter
 from qiskit.primitives import StatevectorEstimator
 
 from givens_rotations import GivensRotations
@@ -15,11 +15,19 @@ ansatz_circuit = QuantumCircuit(4)
 ansatz_circuit.x(0)
 ansatz_circuit.x(1)
 
-theta = ParameterVector("theta", length = 3)
+theta1 = Parameter("θ1")
+theta2 = Parameter("θ2")
+theta3 = Parameter("θ3")
 
-givens_gate_1_theta_one = GivensRotations.G1_ROTATION(theta[0])
-givens_gate_1_theta_two = GivensRotations.G1_ROTATION(theta[1])
-givens_gate_2_theta_three = GivensRotations.G2_ROTATION(theta[2])
+# first_givens_gate_G1 = XXPlusYYGate(theta = 2*theta1, beta = 0, label="G1(θ1)")
+# second_givens_gate_G1 = XXPlusYYGate(theta = 2*theta2, beta = 0, label="G1(θ2)")
+#
+# ansatz_circuit = ansatz_circuit.compose(first_givens_gate_G1, [0, 2])
+# ansatz_circuit = ansatz_circuit.compose(second_givens_gate_G1, [1, 3])
+
+givens_gate_1_theta_one = GivensRotations.G1_ROTATION(theta1)
+givens_gate_1_theta_two = GivensRotations.G1_ROTATION(theta2)
+givens_gate_2_theta_three = GivensRotations.G2_ROTATION(theta3)
 
 ansatz_circuit = ansatz_circuit.compose(givens_gate_1_theta_one, [0, 2])
 ansatz_circuit = ansatz_circuit.compose(givens_gate_1_theta_two, [1, 3])
