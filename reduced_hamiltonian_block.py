@@ -56,6 +56,10 @@ full_basis = [
 myhamilt = HeH_HAMILTONIAN()
 ground_state_energy, eigvec = REDUCED_HAMILTONIAN_BLOCK(myhamilt, basis)
 
+eigenvals, eigenvectors = np.linalg.eigh(myhamilt)
+print(eigenvals[0])
+
+
 # Report amplitudes:
 eigvec = np.real(eigvec)
 print(f"\nGround State Energy: {ground_state_energy:.7}")
