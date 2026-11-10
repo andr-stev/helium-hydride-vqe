@@ -8,6 +8,8 @@ from qiskit.quantum_info import SparsePauliOp, Operator, Statevector
 def BASIS_SET(hamiltonian, starting_state):
 
     hamiltonian_operator = hamiltonian.to_operator()
+
+    print(hamiltonian_operator)
     psi0 = Statevector.from_label(starting_state)
 
     basis_states = [psi0]
@@ -19,7 +21,7 @@ def BASIS_SET(hamiltonian, starting_state):
         psi0 = psi_next
         print(basis_states)
 
-    print(CHECK_LINEAR_INDEPENDENCE(basis_states))
+    # print(CHECK_LINEAR_INDEPENDENCE(basis_states))
     # Recall that rank of a matrix is the number of linearly independant rows or columns
     # So the columns are all linearly indepenadnt if the rank of the matrix equals the number of columns
 
