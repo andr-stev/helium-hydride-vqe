@@ -10,7 +10,7 @@ def REDUCED_HAMILTONIAN_BLOCK(hamiltonian, basis_low_to_high):
 
     matrix_from_hamiltonian = hamiltonian.to_matrix()
     dim_of_block = len(basis_low_to_high)
-    # Consrtuct the Hamiltonian block
+    # Construct the Hamiltonian block
     hamiltonian_block = np.zeros((dim_of_block, dim_of_block), dtype="complex")
     for i, row in enumerate(basis_low_to_high):
         state_for_bra = Statevector.from_label(row).conjugate()
@@ -24,7 +24,8 @@ def REDUCED_HAMILTONIAN_BLOCK(hamiltonian, basis_low_to_high):
 
     eigenvals, eigenvectors = np.linalg.eigh(hamiltonian_block)
 
-    return eigenvals[0], eigenvectors[0]
+
+    return eigenvals[0], eigenvectors[:, 0]
 
 
 
@@ -56,14 +57,13 @@ full_basis = [
 myhamilt = HeH_HAMILTONIAN()
 ground_state_energy, eigvec = REDUCED_HAMILTONIAN_BLOCK(myhamilt, basis)
 
-eigenvals, eigenvectors = np.linalg.eigh(myhamilt)
-print(eigenvals[0])
+
 
 
 # Report amplitudes:
 eigvec = np.real(eigvec)
 print(f"\nGround State Energy: {ground_state_energy:.7}")
-print(f"Eigenvector: {eigvec[0]:.6}|0011> +{eigvec[1]:.6}|1001> {eigvec[2]:.5}|0110> +{eigvec[3]:.6}|1100>")
+print(f"Eigenvector: {eigvec[0]:.6}|0011> {eigvec[1]:.6}|1001> +{eigvec[2]:.5}|0110> +{eigvec[3]:.6}|1100>")
 
 
 full_ground_state_energy, full_eigvec = REDUCED_HAMILTONIAN_BLOCK(myhamilt, full_basis)
