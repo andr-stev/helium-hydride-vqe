@@ -2,6 +2,7 @@ import numpy as np
 from qiskit.quantum_info import SparsePauliOp
 from qiskit_nature.second_q.drivers import PySCFDriver
 from qiskit_nature.second_q.mappers import InterleavedQubitMapper, JordanWignerMapper
+from qiskit_nature.units import DistanceUnit
 
 
 def HeH_HAMILTONIAN():
@@ -11,6 +12,7 @@ def HeH_HAMILTONIAN():
         basis="sto3g",
         charge=1,  # HeH+ has a +1 charge
         spin=0,
+        unit = DistanceUnit.ANGSTROM
     )
 
     problem = driver.run()
