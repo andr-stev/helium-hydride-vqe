@@ -63,8 +63,9 @@ print(eigenvals[0])
 # Report amplitudes:
 eigvec = np.real(eigvec)
 print(f"\nGround State Energy: {ground_state_energy:.7}")
-print(f"Eignevector: {eigvec[0]:.6}|0011> +{eigvec[1]:.6}|1001> {eigvec[2]:.5}|0110> +{eigvec[3]:.6}|1100>")
+print(f"Eigenvector: {eigvec[0]:.6}|0011> +{eigvec[1]:.6}|1001> {eigvec[2]:.5}|0110> +{eigvec[3]:.6}|1100>")
 
 
-full_ground_state_energy, _ = REDUCED_HAMILTONIAN_BLOCK(myhamilt, full_basis)
+full_ground_state_energy, full_eigvec = REDUCED_HAMILTONIAN_BLOCK(myhamilt, full_basis)
 print(f"Lowest Energy (Through Invalid States, Unreachable): {full_ground_state_energy:.7}\n")
+print(full_eigvec)
